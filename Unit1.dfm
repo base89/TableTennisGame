@@ -4,7 +4,7 @@ object Form1: TForm1
   Width = 1214
   Height = 552
   BorderIcons = [biSystemMenu, biMinimize]
-  Caption = 'Form1'
+  Caption = 'Tennis Game 1.0'
   Color = clBtnFace
   Constraints.MaxHeight = 552
   Constraints.MaxWidth = 1214
@@ -52395,9 +52395,47 @@ object Form1: TForm1
     ParentColor = False
     ParentFont = False
   end
+  object bouncesTable: TLabel
+    Left = 464
+    Top = 256
+    Width = 265
+    Height = 41
+    Alignment = taCenter
+    Anchors = []
+    AutoSize = False
+    Caption = 'Bounces: '
+    Color = clBtnFace
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGreen
+    Font.Height = -32
+    Font.Name = 'Square721 BT'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
+  object roundTable: TLabel
+    Left = 464
+    Top = 32
+    Width = 265
+    Height = 41
+    Alignment = taCenter
+    Anchors = []
+    AutoSize = False
+    Caption = 'Round:'
+    Color = clBtnFace
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clMaroon
+    Font.Height = -32
+    Font.Name = 'Square721 BT'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
   object nextRoundButton: TButton
     Left = 464
-    Top = 312
+    Top = 328
     Width = 265
     Height = 65
     Cursor = crHandPoint
@@ -52414,7 +52452,7 @@ object Form1: TForm1
   end
   object newGameButton: TButton
     Left = 464
-    Top = 392
+    Top = 408
     Width = 265
     Height = 65
     Cursor = crHandPoint

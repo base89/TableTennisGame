@@ -32,6 +32,8 @@ __published:	// IDE-managed Components
     TMediaPlayer *paddleSounds;
     TButton *mainButton;
     TLabel *infoTable;
+    TLabel *bouncesTable;
+    TLabel *roundTable;
     void __fastcall TimerBallTimer(TObject *Sender);
     void __fastcall TimerLeftUpTimer(TObject *Sender);
     void __fastcall TimerLeftDownTimer(TObject *Sender);

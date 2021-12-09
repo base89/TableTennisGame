@@ -4,7 +4,7 @@ object Form1: TForm1
   Width = 1214
   Height = 552
   BorderIcons = [biSystemMenu, biMinimize]
-  Caption = 'Form1'
+  Caption = 'Tennis Game 1.0'
   Color = clBtnFace
   Constraints.MaxHeight = 552
   Constraints.MaxWidth = 1214
@@ -52340,6 +52340,43 @@ object Form1: TForm1
     Transparent = True
     Visible = False
   end
+  object resultTable: TLabel
+    Left = 464
+    Top = 184
+    Width = 265
+    Height = 58
+    Alignment = taCenter
+    Anchors = []
+    AutoSize = False
+    Caption = '0  :  0'
+    Color = clBtnFace
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -48
+    Font.Name = 'Square721 BT'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
+  object infoTable: TLabel
+    Left = 208
+    Top = 88
+    Width = 785
+    Height = 65
+    Alignment = taCenter
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    AutoSize = False
+    Color = clBtnFace
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -48
+    Font.Name = 'Square721 BT'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
   object mainTable: TLabel
     Left = 384
     Top = 64
@@ -52358,19 +52395,38 @@ object Form1: TForm1
     ParentColor = False
     ParentFont = False
   end
-  object resultTable: TLabel
+  object bouncesTable: TLabel
     Left = 464
-    Top = 232
+    Top = 256
     Width = 265
-    Height = 58
+    Height = 41
     Alignment = taCenter
     Anchors = []
     AutoSize = False
-    Caption = '0  :  0'
+    Caption = 'Bounces: '
     Color = clBtnFace
     Font.Charset = ANSI_CHARSET
-    Font.Color = clBlack
-    Font.Height = -48
+    Font.Color = clGreen
+    Font.Height = -32
+    Font.Name = 'Square721 BT'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
+  object roundTable: TLabel
+    Left = 464
+    Top = 32
+    Width = 265
+    Height = 41
+    Alignment = taCenter
+    Anchors = []
+    AutoSize = False
+    Caption = 'Round:'
+    Color = clBtnFace
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clMaroon
+    Font.Height = -32
     Font.Name = 'Square721 BT'
     Font.Style = [fsBold]
     ParentColor = False
@@ -52379,7 +52435,7 @@ object Form1: TForm1
   end
   object nextRoundButton: TButton
     Left = 464
-    Top = 312
+    Top = 328
     Width = 265
     Height = 65
     Cursor = crHandPoint
@@ -52396,7 +52452,7 @@ object Form1: TForm1
   end
   object newGameButton: TButton
     Left = 464
-    Top = 392
+    Top = 408
     Width = 265
     Height = 65
     Cursor = crHandPoint
@@ -52435,7 +52491,7 @@ object Form1: TForm1
     Width = 265
     Height = 65
     Cursor = crHandPoint
-    Caption = 'New Game'
+    Caption = 'Start Game'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -31

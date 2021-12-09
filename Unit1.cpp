@@ -15,7 +15,7 @@ float axisY = 10;
 int leftPlayerPoints = 0;
 int rightPlayerPoints = 0;
 int bounceCount = 0;
-int roundCount = 1;
+int roundCount = 0;
 AnsiString player = "";
 
 //---------------------------------------------------------------------------
@@ -46,18 +46,39 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
             ball->Top += ball->Height;
 
             rightPlayerPoints++;
-            resultTable->Caption = IntToStr(leftPlayerPoints) + "  :  " + IntToStr(rightPlayerPoints);
-            player = "RIGHT";
-            infoTable->Caption = " Point for:  " + player + " PLAYER  >>";
             roundCount++;
             TimerBall->Enabled = false;
             ball->Visible = false;
             sndPlaySound("snd/applause.wav", SND_ASYNC);
 
-            nextRoundButton->Visible = true;
-            newGameButton->Visible = true;
-            infoTable->Visible = true;
-            resultTable->Visible = true;
+            if (rightPlayerPoints >= 11 && (rightPlayerPoints - leftPlayerPoints >= 2))
+                {
+                    resultTable->Caption = IntToStr(leftPlayerPoints) + "  :  " + IntToStr(rightPlayerPoints);
+                    infoTable->Caption = " RIGHT  PLAYER  WIN!  >>";
+                    bouncesTable->Caption = " Bounces:  " + IntToStr(bounceCount);
+                    roundTable->Caption = " ROUND:  " + IntToStr(roundCount);
+
+                    newGameButton->Visible = true;
+                    roundTable->Visible = true;
+                    infoTable->Visible = true;
+                    resultTable->Visible = true;
+                    bouncesTable->Visible = true;
+                }
+            else
+                {
+                resultTable->Caption = IntToStr(leftPlayerPoints) + "  :  " + IntToStr(rightPlayerPoints);
+                player = "RIGHT";
+                infoTable->Caption = " Point for:  " + player + " PLAYER  >>";
+                bouncesTable->Caption = " Bounces:  " + IntToStr(bounceCount);
+                roundTable->Caption = " ROUND:  " + IntToStr(roundCount);
+
+                nextRoundButton->Visible = true;
+                newGameButton->Visible = true;
+                roundTable->Visible = true;
+                infoTable->Visible = true;
+                resultTable->Visible = true;
+                bouncesTable->Visible = true;
+                }
         }
     else if (ball->Left >= table->Left + table->Width - ball->Width + 10)
         {
@@ -65,18 +86,40 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
             ball->Top += ball->Height;
 
             leftPlayerPoints++;
-            resultTable->Caption = IntToStr(leftPlayerPoints) + "  :  " + IntToStr(rightPlayerPoints);
-            player = "LEFT";
-            infoTable->Caption = "Point for:   <<  " + player + " PLAYER";
             roundCount++;
             TimerBall->Enabled = false;
             ball->Visible = false;
             sndPlaySound("snd/applause.wav", SND_ASYNC);
 
-            nextRoundButton->Visible = true;
-            newGameButton->Visible = true;
-            infoTable->Visible = true;
-            resultTable->Visible = true;
+            if (leftPlayerPoints >= 11 && (leftPlayerPoints - rightPlayerPoints >= 2))
+                {
+                    resultTable->Caption = IntToStr(leftPlayerPoints) + "  :  " + IntToStr(rightPlayerPoints);
+                    infoTable->Caption = " <<  LEFT  PLAYER  WIN!";
+                    bouncesTable->Caption = " Bounces:  " + IntToStr(bounceCount);
+                    roundTable->Caption = " ROUND:  " + IntToStr(roundCount);
+
+                    newGameButton->Visible = true;
+                    roundTable->Visible = true;
+                    infoTable->Visible = true;
+                    resultTable->Visible = true;
+                    bouncesTable->Visible = true;
+                }
+            else
+                {
+                    resultTable->Caption = IntToStr(leftPlayerPoints) + "  :  " + IntToStr(rightPlayerPoints);
+                    player = "LEFT";
+                    infoTable->Caption = "Point for:   <<  " + player + " PLAYER";
+                    bouncesTable->Caption = " Bounces:  " + IntToStr(bounceCount);
+                    roundTable->Caption = " ROUND:  " + IntToStr(roundCount);
+
+                    nextRoundButton->Visible = true;
+                    newGameButton->Visible = true;
+                    roundTable->Visible = true;
+                    infoTable->Visible = true;
+                    resultTable->Visible = true;
+                    bouncesTable->Visible = true;
+                }
+            
         }
     else if (ball->Left + ball->Width / 2 <= paddleLeft->Left + paddleLeft->Width &&
             ball->Top + ball->Height / 2 >= paddleLeft->Top + TOP_BORDER_USED_PICTURE &&
@@ -131,6 +174,7 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
                     }
             }
         }
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::TimerLeftUpTimer(TObject *Sender)
@@ -187,6 +231,19 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
+    ShowMessage("Welcome to TENNIS GAME 1.0!\n\n"
+    "RACKET CONTROL:\n"
+    "LEFT PLAYER control: press A and Z keys.\n"
+    "RIGHT PLAYER control: press UP and DOWN keys.\n\n"
+    "WIN:\n"
+    "Player who scores 11 points and has a 2-point lead over his opponent.\n\n"
+    "CURIOSITY:\n"
+    "Rackets are divided into zones.\n"
+    "Ball bounces at different speeds depending on the position on the racket.\n"
+    "The longer you bounce, the faster the ball moves.\n"
+    "The player who won the previous round serves.\n\n"
+    "Have fun!");
+
     ballSounds->FileName = "snd/dzwiekSciana.wav";
     ballSounds->Open();
     paddleSounds->FileName = "snd/dzwiekPaletka.wav";
@@ -215,7 +272,7 @@ void __fastcall TForm1::mainButtonClick(TObject *Sender)
     leftPlayerPoints = 0;
     rightPlayerPoints = 0;
     bounceCount = 0;
-    roundCount = 1;
+    roundCount = 0;
     player = "";
 
     TimerBall->Enabled = true;
@@ -223,9 +280,11 @@ void __fastcall TForm1::mainButtonClick(TObject *Sender)
     mainButton->Visible = false;
     nextRoundButton->Visible = false;
     newGameButton->Visible = false;
+    roundTable->Visible = false;
     mainTable->Visible = false;
     infoTable->Visible = false;
     resultTable->Visible = false;
+    bouncesTable->Visible = false;
 
     randomize();
     ball->Left = 476;
@@ -241,14 +300,18 @@ void __fastcall TForm1::newGameButtonClick(TObject *Sender)
 
 void __fastcall TForm1::nextRoundButtonClick(TObject *Sender)
 {
+    bounceCount = 0;
+
     TimerBall->Enabled = true;
     ball->Visible = true;
     mainButton->Visible = false;
     nextRoundButton->Visible = false;
     newGameButton->Visible = false;
+    roundTable->Visible = false;
     mainTable->Visible = false;
     infoTable->Visible = false;
     resultTable->Visible = false;
+    bouncesTable->Visible = false;
 
     if (player == "LEFT")
         {
