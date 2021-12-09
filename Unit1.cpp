@@ -253,13 +253,19 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 
 void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
 {
-    ballSounds->Close();
-    paddleSounds->Close();
+    TimerBall->Enabled = false;
 
     if (Application->MessageBoxA("Do you want to exit program?", "Confirm",
     MB_YESNO | MB_ICONQUESTION) == IDNO)
     {
+        TimerBall->Enabled = true;
+        ball->Visible = true;
         Action = caNone;
+    }
+    else
+    {
+        ballSounds->Close();
+        paddleSounds->Close();
     }
 }
 //---------------------------------------------------------------------------

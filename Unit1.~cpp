@@ -232,8 +232,11 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
     ShowMessage("Welcome to TENNIS GAME 1.0!\n\n"
-    "LEFT PLAYER controls: press A and Z keys.\n"
-    "RIGHT PLAYER controls: press UP and DOWN keys.\n\n"
+    "RACKET CONTROL:\n"
+    "LEFT PLAYER control: press A and Z keys.\n"
+    "RIGHT PLAYER control: press UP and DOWN keys.\n\n"
+    "WIN:\n"
+    "Player who scores 11 points and has a 2-point lead over his opponent.\n\n"
     "CURIOSITY:\n"
     "Rackets are divided into zones.\n"
     "Ball bounces at different speeds depending on the position on the racket.\n"
@@ -252,6 +255,8 @@ void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
 {
     ballSounds->Close();
     paddleSounds->Close();
+    TimerBall->Enabled = false;
+    ball->Visible = false;
 
     if (Application->MessageBoxA("Do you want to exit program?", "Confirm",
     MB_YESNO | MB_ICONQUESTION) == IDNO)
@@ -324,7 +329,7 @@ void __fastcall TForm1::nextRoundButtonClick(TObject *Sender)
         }
 
     randomize();
-    ball->Top = random(table->Height - paddleLeft->Height) + paddleLeft->Height;
+    ball->Top = random(table->Height - paddleLeft->Height) + paddleLeft->Height / 2;
 }
 //---------------------------------------------------------------------------
 
